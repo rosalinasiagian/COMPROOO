@@ -83,7 +83,7 @@ const HubungiKami = () => {
             <p className="font-['Inter',_sans-serif] text-gray-500 text-sm mb-6 min-h-[40px]">
               bds II Jln.nuri, Blk. J1 No.18, sungai nangka,<br />Kecamatan Balikpapan Selatan, Kota Balikpapan, Kalimantan Timur 76115
             </p>
-            <a href="https://maps.google.com/maps?q=bds+II+Jln.nuri,+Blk.+J1+No.18,+sungai+nangka,+Kecamatan+Balikpapan+Selatan,+Kota+Balikpapan,+Kalimantan+Timur+76115" target="_blank" rel="noreferrer" className="font-['Manrope',_sans-serif] text-[#F5BC00] text-sm font-medium flex items-center gap-1 hover:text-[#F5BC00]">
+            <a href="https://maps.app.goo.gl/1KCAvMMquMir8iEm7" target="_blank" rel="noreferrer" className="font-['Manrope',_sans-serif] text-[#F5BC00] text-sm font-medium flex items-center gap-1 hover:text-[#F5BC00]">
               Lihat di Peta <ArrowRight size={14} />
             </a>
           </div>
@@ -117,7 +117,7 @@ const HubungiKami = () => {
       {/* Map Section */}
       <section className="w-full h-[350px] bg-gray-200 relative overflow-hidden my-8 rounded-2xl mx-auto max-w-7xl shadow-sm border border-gray-100">
         <iframe
-          src="https://maps.google.com/maps?q=-1.2559363,116.8770375+(CV%20Mandiri%20Perkasa%20Logis)&t=&z=16&ie=UTF8&iwloc=&output=embed"
+          src="https://maps.google.com/maps?q=-4.0412583,122.4623785+(AKSAR+GARAGE)&t=&z=17&ie=UTF8&iwloc=&output=embed"
           className="absolute inset-0 w-full h-full border-0"
           allowFullScreen=""
           loading="lazy"
