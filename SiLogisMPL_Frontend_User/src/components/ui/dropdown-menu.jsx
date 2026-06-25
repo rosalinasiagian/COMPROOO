@@ -1,0 +1,4 @@
+export const DropdownMenu = ({ children }) => <div>{children}</div>;
+export const DropdownMenuTrigger = ({ children }) => <div>{children}</div>;
+export const DropdownMenuContent = ({ children }) => <div>{children}</div>;
+export const DropdownMenuItem = ({ children }) => <div>{children}</div>;

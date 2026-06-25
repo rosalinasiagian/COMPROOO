@@ -1,0 +1,75 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    margin: 0;
+    font-family: 'Manrope', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background: #eef0f5;
+    color: #0f1115;
+}
+
+@layer base {
+    :root {
+        --background: 0 0% 100%;
+        --foreground: 220 13% 9%;
+        --card: 0 0% 100%;
+        --card-foreground: 220 13% 9%;
+        --popover: 0 0% 100%;
+        --popover-foreground: 220 13% 9%;
+        --primary: 46 100% 48%;
+        --primary-foreground: 0 0% 100%;
+        --secondary: 220 14% 96%;
+        --secondary-foreground: 220 13% 9%;
+        --muted: 220 14% 96%;
+        --muted-foreground: 220 9% 46%;
+        --accent: 46 100% 95%;
+        --accent-foreground: 46 100% 30%;
+        --destructive: 0 84% 60%;
+        --destructive-foreground: 0 0% 98%;
+        --border: 220 13% 91%;
+        --input: 220 13% 91%;
+        --ring: 46 100% 48%;
+        --radius: 0.75rem;
+        --mpl-orange: 46 100% 48%;
+        --mpl-orange-soft: 46 100% 96%;
+        --mpl-black: 220 13% 9%;
+    }
+}
+
+@layer base {
+    * {
+        @apply border-border;
+    }
+    body {
+        @apply bg-background text-foreground;
+    }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #d1d5db; border-radius: 8px; }
+::-webkit-scrollbar-thumb:hover { background: #9ca3af; }
+
+/* MPL custom utilities */
+.mpl-card {
+    @apply bg-white rounded-2xl border border-gray-200/70 shadow-sm;
+}
+.mpl-btn-primary {
+    @apply bg-[#FFA000] hover:bg-[#E69000] text-white font-semibold rounded-md transition-colors;
+}
+.mpl-table-header {
+    @apply text-[10px] font-semibold tracking-[0.15em] text-gray-400 uppercase;
+}
+.fade-in {
+    animation: fadeIn 0.35s ease-out;
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
