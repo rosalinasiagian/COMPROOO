@@ -5,7 +5,8 @@ import { Button } from "../components/ui/button";
 import { Input } from "../components/ui/input";
 import { Label } from "../components/ui/label";
 import { toast } from "sonner";
-import { Lock, Mail, Loader2 } from "lucide-react";
+import { Lock, Mail, Loader2, Wifi } from "lucide-react";
+import { api } from "../lib/api.js";
 
 export default function Login() {
   const { login, user } = useAuth();
@@ -14,6 +15,27 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const [serverStatus, setServerStatus] = useState("checking"); // 'checking' | 'ready' | 'slow'
+
+  // Ping backend saat halaman login dibuka agar HuggingFace space bangun
+  useEffect(() => {
+    const wakeUpBackend = async () => {
+      try {
+        await api.get("/user/companyprofile", { timeout: 8000 });
+        setServerStatus("ready");
+      } catch {
+        // Kalau timeout, coba sekali lagi
+        setServerStatus("slow");
+        try {
+          await api.get("/user/companyprofile", { timeout: 30000 });
+          setServerStatus("ready");
+        } catch {
+          setServerStatus("ready"); // tetap lanjut meski server lambat
+        }
+      }
+    };
+    wakeUpBackend();
+  }, []);
 
   useEffect(() => {
     if (user) {
@@ -46,6 +68,25 @@ export default function Login() {
           </div>
           <h1 className="text-2xl font-bold text-gray-900">Panel Admin</h1>
           <p className="text-sm text-gray-500 mt-1">Logistics Controller</p>
+          {/* Status koneksi server */}
+          {serverStatus === "checking" && (
+            <div className="flex items-center gap-1.5 mt-3 text-xs text-gray-400">
+              <Loader2 className="w-3 h-3 animate-spin" />
+              <span>Menghubungkan ke server...</span>
+            </div>
+          )}
+          {serverStatus === "slow" && (
+            <div className="flex items-center gap-1.5 mt-3 text-xs text-amber-500">
+              <Wifi className="w-3 h-3" />
+              <span>Server sedang bangun, harap tunggu...</span>
+            </div>
+          )}
+          {serverStatus === "ready" && (
+            <div className="flex items-center gap-1.5 mt-3 text-xs text-green-500">
+              <Wifi className="w-3 h-3" />
+              <span>Server siap</span>
+            </div>
+          )}
         </div>
         <form onSubmit={handleSubmit} className="space-y-5" data-testid="login-form">
           <div className="space-y-2">
