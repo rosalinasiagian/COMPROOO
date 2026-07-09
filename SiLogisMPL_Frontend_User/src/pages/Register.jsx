@@ -35,22 +35,29 @@ const Register = () => {
         toast.success('Registrasi berhasil! Selamat datang.');
         setTimeout(() => navigate('/'), 1000);
       } else {
-        let errorMsg = result?.message || 'Registrasi gagal, silakan coba lagi.';
+        const rawMsg = result?.message?.toLowerCase() || '';
+        let customErrors = [];
         
-        // 1. Hapus duplikat pesan confirmPassword jika isinya sama dengan password (backend mengirim dua kali)
-        errorMsg = errorMsg.replace(/,\s*confirmPassword:\s*Password minimal 8 karakter, serta harus mengandung angka, huruf besar, huruf kecil, dan karakter spesial/gi, '');
-        errorMsg = errorMsg.replace(/confirmPassword:\s*Password minimal 8 karakter, serta harus mengandung angka, huruf besar, huruf kecil, dan karakter spesial,?\s*/gi, '');
-
-        // 2. Ganti kata "Username" dari backend menjadi "Nama Pengguna"
-        errorMsg = errorMsg.replace(/username:\s*Username/gi, 'Nama Pengguna');
+        const isUsernameError = rawMsg.includes('username');
+        const isPasswordError = rawMsg.includes('password') || rawMsg.includes('confirmpassword');
         
-        // 3. Bersihkan sisa prefix nama field jika masih ada
-        errorMsg = errorMsg
-          .replace(/username:\s*/gi, '')
-          .replace(/password:\s*/gi, '')
-          .replace(/confirmPassword:\s*/gi, '')
-          .replace(/email:\s*/gi, '');
-        toast.error(errorMsg);
+        if (isUsernameError) {
+          customErrors.push('Nama Pengguna harus memmiliki 8 sampai 20 karakter');
+        }
+        if (isPasswordError) {
+          customErrors.push('Password minimal 8 karakter, serta harus mengandung angka, huruf besar, huruf kecil, dan karakter spesial');
+        }
+        
+        // Fallback untuk email
+        if (rawMsg.includes('email') && customErrors.length === 0) {
+          customErrors.push('Email sudah digunakan atau tidak valid');
+        }
+        
+        if (customErrors.length > 0) {
+          toast.error(customErrors.join(', '));
+        } else {
+          toast.error(result?.message || 'Registrasi gagal, silakan coba lagi.');
+        }
       }
     } catch (error) {
       toast.error('Terjadi kesalahan jaringan atau server.');
