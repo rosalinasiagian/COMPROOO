@@ -26,11 +26,6 @@ const Register = () => {
       return;
     }
 
-    if (formData.password.length < 6) {
-      toast.error('Password minimal 6 karakter');
-      return;
-    }
-
     try {
       setLoading(true);
       // TAMBAHKAN await DI SINI agar menunggu respon asli dari backend Spring Boot
@@ -40,7 +35,10 @@ const Register = () => {
         toast.success('Registrasi berhasil! Selamat datang.');
         setTimeout(() => navigate('/'), 1000);
       } else {
-        toast.error(result?.message || 'Registrasi gagal, silakan coba lagi.');
+        let errorMsg = result?.message || 'Registrasi gagal, silakan coba lagi.';
+        // Ganti kata 'username' dari backend menjadi 'Nama pengguna'
+        errorMsg = errorMsg.replace(/username/gi, 'Nama pengguna');
+        toast.error(errorMsg);
       }
     } catch (error) {
       toast.error('Terjadi kesalahan jaringan atau server.');
