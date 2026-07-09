@@ -35,14 +35,18 @@ const Register = () => {
         toast.success('Registrasi berhasil! Selamat datang.');
         setTimeout(() => navigate('/'), 1000);
       } else {
-        const rawMsg = result?.message?.toLowerCase() || '';
+        // Pastikan kita bisa membaca pesan error baik jika berupa string, array, atau object
+        const rawMsg = typeof result?.message === 'string' 
+            ? result.message.toLowerCase() 
+            : JSON.stringify(result?.message || '').toLowerCase();
+            
         let customErrors = [];
         
         const isUsernameError = rawMsg.includes('username');
         const isPasswordError = rawMsg.includes('password') || rawMsg.includes('confirmpassword');
         
         if (isUsernameError) {
-          customErrors.push('Nama Pengguna harus memmiliki 8 sampai 20 karakter');
+          customErrors.push('Nama Pengguna harus memiliki 8 sampai 20 karakter');
         }
         if (isPasswordError) {
           customErrors.push('Password minimal 8 karakter, serta harus mengandung angka, huruf besar, huruf kecil, dan karakter spesial');
@@ -56,7 +60,7 @@ const Register = () => {
         if (customErrors.length > 0) {
           toast.error(customErrors.join(', '));
         } else {
-          toast.error(result?.message || 'Registrasi gagal, silakan coba lagi.');
+          toast.error(typeof result?.message === 'string' ? result.message : 'Registrasi gagal, silakan coba lagi.');
         }
       }
     } catch (error) {
