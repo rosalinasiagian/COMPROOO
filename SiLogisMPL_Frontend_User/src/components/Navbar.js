@@ -34,13 +34,14 @@ const Navbar = () => {
           {/* BAGIAN KIRI: Logo & Judul */}
           <Link to="/" className="flex items-center gap-4">
             {/* Ganti src dengan path file logo MPL-mu, misalnya '/logo-mpl.png' */}
-            <div className="w-11 h-11 bg-black flex items-center justify-center overflow-hidden">
+            <div className="w-11 h-11 bg-black flex items-center justify-center overflow-hidden flex-shrink-0">
                 <img src="/logo-mpl.jpg" alt="MPL Logo" className="w-full h-full object-contain" />
             </div>
-            <h1 className="text-2xl font-black text-[#111111] tracking-tight">
+            <h1 className="text-base sm:text-xl font-black text-[#111111] tracking-tight hidden xs:block sm:block">
               MANDIRI PERKASA
             </h1>
           </Link>
+
 
           {/* BAGIAN TENGAH: Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-10">

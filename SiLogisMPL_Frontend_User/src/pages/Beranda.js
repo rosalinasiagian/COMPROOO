@@ -199,11 +199,11 @@ const Beranda = () => {
     <div className="bg-white text-black font-['Manrope',_sans-serif] overflow-x-hidden">
 
       {/* 1. HERO SECTION */}
-      <section className="relative max-w-7xl mx-auto px-6 md:px-12 lg:px-16 pt-20 pb-24 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+      <section className="relative max-w-7xl mx-auto px-4 sm:px-6 md:px-12 lg:px-16 pt-24 pb-16 md:pb-24 grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
 
         {/* BAGIAN KIRI: TEKS HERO */}
         <div className="space-y-8 z-10">
-          <h1 className="text-6xl md:text-7xl lg:text-[80px] font-black tracking-tight leading-[1.05]">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-[80px] font-black tracking-tight leading-[1.05]">
             <span className="text-[#F5BC00]">{headline1}</span><br />
             <span className="text-black">{headline2}</span><br />
             <span className="text-[#F5BC00]">{headline3}</span>
@@ -227,7 +227,7 @@ const Beranda = () => {
 
         {/* BAGIAN KANAN: GAMBAR */}
         <div className="relative w-full flex justify-end">
-          <div className="w-full max-w-[500px] h-[550px] rounded-[3rem] overflow-hidden shadow-xl bg-neutral-100">
+          <div className="w-full max-w-[500px] h-[280px] sm:h-[380px] md:h-[480px] lg:h-[550px] rounded-[2rem] lg:rounded-[3rem] overflow-hidden shadow-xl bg-neutral-100">
             <img
               src={heroImg}
               alt={heroAlt}
@@ -235,8 +235,8 @@ const Beranda = () => {
             />
           </div>
 
-          {/* Overlapping Yellow Box */}
-          <div className="absolute bottom-16 -left-8 md:-left-16 bg-[#F5BC00] text-white p-8 rounded-3xl shadow-lg w-[260px]">
+          {/* Overlapping Yellow Box — hidden on mobile */}
+          <div className="hidden md:block absolute bottom-16 -left-8 md:-left-16 bg-[#F5BC00] text-white p-8 rounded-3xl shadow-lg w-[260px]">
             <div className="text-5xl font-black tracking-tight leading-none mb-2">{badgeText.split(' ')[0]}</div>
             <div className="font-['Inter',_sans-serif] text-[13px] font-bold tracking-widest uppercase opacity-95">
               {badgeText.split(' ').slice(1).join(' ') || 'Aman & Terjamin'}
@@ -247,7 +247,7 @@ const Beranda = () => {
             href="https://wa.me/628114055966"
             target="_blank"
             rel="noreferrer"
-            className="absolute -bottom-6 right-8 flex items-center group cursor-pointer z-50"
+            className="hidden md:flex absolute -bottom-6 right-8 items-center group cursor-pointer z-50"
           >
             <div className="bg-[#E5E7EB] group-hover:bg-neutral-300 text-black font-bold text-sm py-4 pl-8 pr-12 rounded-xl shadow-md transition-all font-['Inter',_sans-serif]">
               {ctaText}
@@ -262,8 +262,8 @@ const Beranda = () => {
       </section>
 
       {/* 2. SIAPA KAMI SECTION */}
-      <section className="relative max-w-7xl mx-auto px-6 md:px-12 lg:px-16 pb-24">
-        <h2 className="text-5xl md:text-6xl font-bold tracking-tight mb-8">
+      <section className="relative max-w-7xl mx-auto px-4 sm:px-6 md:px-12 lg:px-16 pb-16 md:pb-24">
+        <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6 md:mb-8">
           Siapa <span className="text-[#F5BC00]">{judulSeksiSiapaKami.replace('Siapa', '').replace('?', '').trim()}</span>
         </h2>
 
@@ -308,8 +308,8 @@ const Beranda = () => {
 
       {/* 3. VISI MISI & NILAI */}
       <section className="py-24 bg-white border-t border-neutral-200">
-        <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-16">
-          <h2 className="text-5xl md:text-6xl font-bold tracking-tight mb-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 lg:px-16">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6 md:mb-8">
             Visi & <span className="text-[#F5BC00]">Misi</span>
           </h2>
           <div className="h-0.5 bg-[#F5BC00] w-full mb-12"></div>
@@ -353,12 +353,12 @@ const Beranda = () => {
           </div>
 
           {/* Nilai-Nilai Perusahaan */}
-          <h2 className="text-5xl md:text-6xl font-bold tracking-tight mb-12">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-8 md:mb-12">
             {company?.judulSeksiNilai || 'Nilai-Nilai'} <span className="text-[#F5BC00]">Perusahaan</span>
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
             {nilaiItems.map((n, i) => (
-              <div key={i} className="bg-[#F8F9FA] p-12 border-b-4 border-[#F5BC00]">
+              <div key={i} className="bg-[#F8F9FA] p-6 md:p-12 border-b-4 border-[#F5BC00]">
                 <div className="flex items-center gap-4 mb-6">
                   <span className="text-5xl font-black text-[#F5BC00]">{n.nomor}</span>
                   <span className="text-2xl">{n.ikon}</span>
@@ -372,8 +372,8 @@ const Beranda = () => {
       </section>
 
       {/* 4. LAYANAN UNGGULAN */}
-      <section className="py-24 bg-[#F2F4F5]">
-        <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-16">
+      <section className="py-12 md:py-24 bg-[#F2F4F5]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 lg:px-16">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mb-16">
             <div>
               <h2 className="text-4xl md:text-5xl font-bold text-[#111111] tracking-tight mb-2">
@@ -403,8 +403,8 @@ const Beranda = () => {
       </section>
 
       {/* 5. KENDARAAN KAMI SECTION */}
-      <section className="pt-24 pb-12 bg-white">
-        <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-16">
+      <section className="pt-12 md:pt-24 pb-8 md:pb-12 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 lg:px-16">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mb-12">
             <div className="max-w-2xl">
               <h2 className="text-3xl md:text-4xl font-bold text-[#0B1727] tracking-tight mb-4">
@@ -460,12 +460,12 @@ const Beranda = () => {
       </section>
 
       {/* 6. TESTIMONIALS SECTION */}
-      <section className="pt-16 pb-24 bg-white text-black">
-        <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-16 text-center">
+      <section className="pt-10 md:pt-16 pb-12 md:pb-24 bg-white text-black">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 lg:px-16 text-center">
           <span className="font-['Inter',_sans-serif] text-[10px] font-bold tracking-widest text-[#B58B00] bg-[#FFF8E5] border border-[#FDE499] px-4 py-1.5 rounded-full inline-block mb-6 uppercase">
             {teksBadgeUlasan}
           </span>
-          <h2 className="text-4xl md:text-5xl lg:text-[56px] font-bold text-[#111111] tracking-tight mb-4">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-[#111111] tracking-tight mb-4">
             {judulSeksiUlasan}
           </h2>
           <p className="font-['Inter',_sans-serif] text-neutral-500 max-w-2xl mx-auto mb-20 text-[18px] leading-relaxed">
