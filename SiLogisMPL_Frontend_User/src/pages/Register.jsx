@@ -36,14 +36,20 @@ const Register = () => {
         setTimeout(() => navigate('/'), 1000);
       } else {
         let errorMsg = result?.message || 'Registrasi gagal, silakan coba lagi.';
-        // Hapus prefix field dari backend agar pesan lebih bersih
+        
+        // 1. Hapus duplikat pesan confirmPassword jika isinya sama dengan password (backend mengirim dua kali)
+        errorMsg = errorMsg.replace(/,\s*confirmPassword:\s*Password minimal 8 karakter, serta harus mengandung angka, huruf besar, huruf kecil, dan karakter spesial/gi, '');
+        errorMsg = errorMsg.replace(/confirmPassword:\s*Password minimal 8 karakter, serta harus mengandung angka, huruf besar, huruf kecil, dan karakter spesial,?\s*/gi, '');
+
+        // 2. Ganti kata "Username" dari backend menjadi "Nama Pengguna"
+        errorMsg = errorMsg.replace(/username:\s*Username/gi, 'Nama Pengguna');
+        
+        // 3. Bersihkan sisa prefix nama field jika masih ada
         errorMsg = errorMsg
           .replace(/username:\s*/gi, '')
           .replace(/password:\s*/gi, '')
           .replace(/confirmPassword:\s*/gi, '')
-          .replace(/email:\s*/gi, '')
-          .replace(/Nama pengguna:\s*/gi, ''); // in case we already replaced username
-        
+          .replace(/email:\s*/gi, '');
         toast.error(errorMsg);
       }
     } catch (error) {
