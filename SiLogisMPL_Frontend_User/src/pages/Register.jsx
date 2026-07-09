@@ -36,8 +36,14 @@ const Register = () => {
         setTimeout(() => navigate('/'), 1000);
       } else {
         let errorMsg = result?.message || 'Registrasi gagal, silakan coba lagi.';
-        // Ganti kata 'username' dari backend menjadi 'Nama pengguna'
-        errorMsg = errorMsg.replace(/username/gi, 'Nama pengguna');
+        // Hapus prefix field dari backend agar pesan lebih bersih
+        errorMsg = errorMsg
+          .replace(/username:\s*/gi, '')
+          .replace(/password:\s*/gi, '')
+          .replace(/confirmPassword:\s*/gi, '')
+          .replace(/email:\s*/gi, '')
+          .replace(/Nama pengguna:\s*/gi, ''); // in case we already replaced username
+        
         toast.error(errorMsg);
       }
     } catch (error) {
